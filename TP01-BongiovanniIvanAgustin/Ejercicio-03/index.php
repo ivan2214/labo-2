@@ -40,67 +40,54 @@ $saldo = $sale1 - $bruto1 + $sale2 - $bruto2;
       <tbody>
         <tr>
           <td>Transferencia entrante</td>
-          <td><?php
-
-              if ($incoming1 > 0) {
-                echo "+";
-              } else {
-                echo "-";
-              }
-              echo " $" . number_format($incoming1, 2, ",", ".");
-              ?>
+          <td>+
+            <?php echo " $" . number_format($incoming1, 2, ",", ".");
+            ?>
           </td>
         </tr>
         <tr>
           <td>Retención IIBB</td>
-          <td>- $<?php
-                  echo number_format($bruto1, 2, ",", ".");
-                  ?></td>
+          <td>-
+            <?php
+            echo " $" . number_format($bruto1, 2, ",", ".");
+            ?></td>
         </tr>
         <tr>
           <td>Transferencia entrante</td>
-          <td><?php
-
-              if ($incoming2 > 0) {
-                echo "+";
-              } else {
-                echo "-";
-              }
-              echo " $" . number_format($incoming2, 2, ",", ".");
-              ?>
+          <td>+
+            <?php
+            echo " $" . number_format($incoming2, 2, ",", ".");
+            ?>
           </td>
         </tr>
         <tr>
           <td>Retención IIBB</td>
-          <td>- $<?php
-                  echo number_format($bruto2, 2, ",", ".");
-                  ?></td>
+          <td>-
+            <?php
+            echo " $" . number_format($bruto2, 2, ",", ".");
+            ?></td>
         </tr>
         <tr>
           <td>Transferencia saliente</td>
-          <td>- $<?php
-                  $sale1 = mt_rand(80000, 130000);
-                  echo number_format($sale1, 2, ",", ".");
-                  ?></td>
+          <td>-
+            <?php
+            $sale1 = mt_rand(80000, 130000);
+            echo " $" . number_format($sale1, 2, ",", ".");
+            ?></td>
         </tr>
         <tr>
           <td>Transferencia saliente</td>
-          <td>- $<?php
-
-                  echo number_format($sale2, 2, ",", ".");
-                  ?></td>
+          <td>-
+            <?php
+            echo " $" . number_format($sale2, 2, ",", ".");
+            ?></td>
         </tr>
         <tr>
           <td>Saldo</td>
-          <td><?php
-
-              if ($saldo > 0) {
-                echo "+";
-              } else {
-                echo "-";
-              }
-              echo " $" . number_format($saldo, 2, ",", ".");
-              ?>
+          <td>+
+            <?php
+            echo " $" . number_format($saldo, 2, ",", ".");
+            ?>
           </td>
         </tr>
       </tbody>

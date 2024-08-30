@@ -39,6 +39,8 @@ echo "<hr>\n";
 // Calculo de la capacidad del pendrive y la muestro en GB
 $penDrive -= ($file1InMB + $file2InMB + $file3InMB) / FACTOR;
 
+$penDrive = number_format($penDrive, 2, ",", ".");
+
 echo "Espacio libre: $penDrive GB";
 
 

@@ -52,7 +52,7 @@ $sueldoNeto = $sueldoBasico - ($aporteJubilatorio + $aporteObraSocial);
           <td>$<?= number_format($aporteObraSocial, 2, ",", "."); ?></td>
         </tr>
         <tr>
-          <td>Sueldo neto</td>
+          <th>Sueldo neto</th>
           <td>$<?= number_format($sueldoNeto, 2, ",", "."); ?></td>
         </tr>
       </tbody>
