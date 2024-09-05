@@ -24,8 +24,8 @@ $letra2 = chr(rand(65, 90));
 $patente = INICIO_PATENTE . $numeroFormateado . $letra1 . $letra2;
 ?>
 
-<main class="d-flex justify-content-center align-items-center ">
-  <section class="container my-5">
+<main class="flex justify-center h-full items-center">
+  <section class="my-5">
     <article>
       <p class="text-center">
 

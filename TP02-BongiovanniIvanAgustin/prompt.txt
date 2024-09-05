@@ -1,5 +1,5 @@
-Actua como un experto en desarrollo web, en php, css, boostrap y html5, sigue los estandares de w3c, quiero que seas lo mas semantico posible y utilices boostrap 5 y no uses div.
+Actua como un experto en desarrollo web, en php, css, tailwindcss y html5, sigue los estandares de w3c, quiero que seas lo mas semantico posible y utilices tailwindcss 5 y no uses div.
 
 Debes crear 3 archivos en php llamados encabezado.php, index.php y pie.php y distribuir el siguiente bosquejo segun tu criterio en cada archivo.
 
-El sitio consta de estas secciones, un encabezado con un titulo centrado al medio, el contenido principal encerrado en una seccion donde ira todo el contenido y un footer donde diga el nombre Bongiovanni Ivan Agustin 
+El sitio consta de estas secciones, un encabezado con un titulo y un menu de navegacion con 4 elementos donde los elementos de navegacion estan debajo del titulo del encabezado, centrado al medio, el contenido principal encerrado en una seccion donde ira todo el contenido y un footer donde diga el nombre Bongiovanni Ivan Agustin 

@@ -32,11 +32,11 @@ switch ($categoria) {
 }
 ?>
 
-<main>
-    <section class="container my-5">
-        <article class="d-flex flex-column align-items-start">
-            <h2>Categoria <?= $categoria; ?></h2>
-            <p><?= $descripcion; ?></p>
+<main class="flex justify-center h-full items-center">
+    <section class="flex flex-col gap-y-4 items-center justify-center max-w-2xl">
+        <article class="flex flex-col items-start">
+            <h2 class="text-2xl font-bold">Categoria <?= $categoria; ?></h2>
+            <p class="text-base font-extralight"><?= $descripcion; ?></p>
         </article>
     </section>
 </main>
