@@ -2,12 +2,13 @@
 
 
 <?php
-// Cotización de USDT
+
 const COTIZACION_USDT = 1322.74;
 $dineroDisponible = rand(200000, 400000);
 
-// Calcular la comisión y el dinero restante
+
 if ($dineroDisponible < 300000) {
+
     $comision = $dineroDisponible * 0.01; // 1% de comisión
     $porcentajeComision = "1%";
 } else {
@@ -17,8 +18,9 @@ if ($dineroDisponible < 300000) {
 
 $dineroRestante = $dineroDisponible - $comision;
 
-// Cantidad de USDT comprados
+
 $usdtComprados = $dineroRestante / COTIZACION_USDT;
+
 ?>
 
 <main class="flex justify-center h-full items-center my-5">

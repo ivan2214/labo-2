@@ -1,57 +1,53 @@
 <?php require_once('php/encabezado.php'); ?>
 
 <?php
-// Generar dos números aleatorios del 1 al 12
+
 $naipe1 = rand(1, 12);
 $naipe2 = rand(1, 12);
 
 /* 
-naipes ganadorees pruebas sumados dan 9.5 puntos
+naipes ganadorees pruebas sumados dan 9.5
 $naipe1 = 9;
-$naipe2 = 10; */
+$naipe2 = 10; 
+*/
 
-
-function determinarValorNaipe($naipe)
-{
-    // si es un naipe del 10 o 11 o 12 dan 0.5 puntos y sino el naipe tiene el mismo valor
-    if ($naipe == 10 || $naipe == 11 || $naipe == 12) {
-        return 0.5;
-    }
-    return $naipe;
+// Determinar el valor de cada naipe
+if ($naipe1 == 10 || $naipe1 == 11 || $naipe1 == 12) {
+    $valorNaipe1 = 0.5;
+} else {
+    $valorNaipe1 = $naipe1;
 }
 
-function calcularPuntaje($naipe1, $naipe2)
-{
-    // calcular el valor de cada naipe y sumarlos para determinar elresultado del juego
-    $valorNaipe1 = determinarValorNaipe($naipe1);
-    $valorNaipe2 = determinarValorNaipe($naipe2);
-
-    $resultado = $valorNaipe1 + $valorNaipe2;
-    return $resultado;
+if ($naipe2 == 10 || $naipe2 == 11 || $naipe2 == 12) {
+    $valorNaipe2 = 0.5;
+} else {
+    $valorNaipe2 = $naipe2;
 }
 
-// para mostar een html
-function obtenerNombreCarta($naipe)
-{
-    switch ($naipe) {
-        case 10:
-            return "Sota";
-        case 11:
-            return "Caballo";
-        case 12:
-            return "Rey";
-        default:
-            return $naipe; // Para cartas del 1 al 9
-    }
+$puntaje = $valorNaipe1 + $valorNaipe2;
+
+// Obtener el nombre de cada carta
+if ($naipe1 == 10) {
+    $carta1 = "Sota";
+} elseif ($naipe1 == 11) {
+    $carta1 = "Caballo";
+} elseif ($naipe1 == 12) {
+    $carta1 = "Rey";
+} else {
+    $carta1 = $naipe1;
 }
 
-// Calcular puntaje
-$puntaje = calcularPuntaje($naipe1, $naipe2);
-// obtener nombre de las cartas para mostrarr en el hmtl
-$carta1 = obtenerNombreCarta($naipe1);
-$carta2 = obtenerNombreCarta($naipe2);
+if ($naipe2 == 10) {
+    $carta2 = "Sota";
+} elseif ($naipe2 == 11) {
+    $carta2 = "Caballo";
+} elseif ($naipe2 == 12) {
+    $carta2 = "Rey";
+} else {
+    $carta2 = $naipe2;
+}
 
-// mensaje de resultado
+
 $resultado = ($puntaje == 9.5)
     ? '<p class="text-green-500">GANADOR!</p>'
     : '<p class="text-red-500">PUNTOS OBTENIDOS: <strong>' . number_format($puntaje, 1) . '</strong></p>';
