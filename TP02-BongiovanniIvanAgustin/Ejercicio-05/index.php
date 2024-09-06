@@ -2,8 +2,8 @@
 
 <?php
 
-$naipe1 = rand(1, 12);
-$naipe2 = rand(1, 12);
+$naipe1 = mt_rand(1, 12);
+$naipe2 = mt_rand(1, 12);
 
 /* 
 naipes ganadorees pruebas sumados dan 9.5

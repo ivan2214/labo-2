@@ -2,7 +2,7 @@
 
 <?php
 
-$categoria = chr(rand(65, 71)); // 65 es 'A', 71 es 'G'
+$categoria = chr(mt_rand(65, 71)); // 65 es 'A', 71 es 'G'
 
 switch ($categoria) {
     case 'A':

@@ -4,7 +4,7 @@
 <?php
 
 const COTIZACION_USDT = 1322.74;
-$dineroDisponible = rand(200000, 400000);
+$dineroDisponible = mt_rand(200000, 400000);
 
 
 if ($dineroDisponible < 300000) {

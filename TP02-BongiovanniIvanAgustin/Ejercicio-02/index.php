@@ -5,7 +5,7 @@
 const INICIO_PATENTE = "AG";
 
 // Generamos un número aleatorio entre 0 y 999
-$numeroAleatorio = rand(0, 999);
+$numeroAleatorio = mt_rand(0, 999);
 
 // formateo el numero si es meenor de 3 digitos
 if ($numeroAleatorio < 10) {
@@ -16,8 +16,8 @@ if ($numeroAleatorio < 10) {
   $numeroFormateado = $numeroAleatorio;
 }
 
-$letra1 = chr(rand(65, 90)); // 65 es 'A', 90 es 'Z'
-$letra2 = chr(rand(65, 90));
+$letra1 = chr(mt_rand(65, 90)); // 65 es 'A', 90 es 'Z'
+$letra2 = chr(mt_rand(65, 90));
 
 
 $patente = INICIO_PATENTE . $numeroFormateado . $letra1 . $letra2;
