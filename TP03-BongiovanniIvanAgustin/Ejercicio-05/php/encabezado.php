@@ -19,7 +19,7 @@
 </head>
 
 <body class="container flex flex-col justify-between mx-auto bg-zinc-700 text-white antialiased w-full h-full">
-    <header class="text-center py-3 flex flex-col-reverse gap-y-4">
+    <header class="text-center py-3 flex flex-col-reverse bg-zinc-900 gap-y-4">
         <nav>
             <ul class="flex justify-center gap-x-4">
                 <li class="transition-all duration-500 hover:text-blue-500">

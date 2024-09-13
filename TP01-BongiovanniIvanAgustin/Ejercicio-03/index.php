@@ -18,10 +18,7 @@ $bruto2 = $incoming2 * ALICUOTA / 100;
 $sale1 = mt_rand(80000, 130000);
 $sale2 = mt_rand(80000, 130000);
 
-/* Realice los cálculos necesarios (sumas y restas) para obtener el saldo final de la
-cuenta */
-
-$saldo = $sale1 - $bruto1 + $sale2 - $bruto2;
+$saldo = ($incoming1 + $incoming2) - ($bruto1 + $bruto2) - ($sale1 + $sale2);
 
 
 ?>
