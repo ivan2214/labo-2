@@ -2,14 +2,7 @@
 
 <?php
 
-$juegos = [
-  'Age Of Mythology Retold' => 22.99,
-  'NBA 2K25' => 69.99,
-  'Baldurs Gate III' => 27.99,
-  'Fallout 76' => 23.99,
-  'CoD Black Ops 6' => 69.99
-];
-
+require_once('php/juegos.php');
 // variables para el conteo de ventas, recaudación y descuento
 $ventas = [];
 $totalRecaudado = 0;
@@ -18,8 +11,8 @@ $descuento = 0.0;
 // simulo 1000 ventas de los 5 juegos 
 for ($i = 0; $i < 1000; $i++) {
   // $i representa la cantidad de ventas 
-  $juegoSeleccionado = array_rand($juegos); // Seleccionar un juego al azar para la venta
-  $precioOriginal = $juegos[$juegoSeleccionado]; // Obtener el precio original del juego
+  $juegoSeleccionado = array_rand($juegos); // seleccionar un juego al azar para la venta
+  $precioOriginal = $juegos[$juegoSeleccionado]; // obtengo el precio original del juego
 
   // calcular el descuento basado en el número de ventas 
   if ($i < 10) {
@@ -32,16 +25,10 @@ for ($i = 0; $i < 1000; $i++) {
     $descuento = 0.30; // 30% de descuento
   }
 
-  // Calcular el precio final después de aplicar el descuento
-  // Paso 1: El valor de $descuento representa el porcentaje de descuento (ejemplo: 0.80 para un 80% de descuento)
-  // Paso 2: Al restar $descuento de 1 (1 - $descuento), obtenemos el porcentaje que el cliente pagará del precio original.
-  //         Por ejemplo, si $descuento es 0.80, entonces 1 - 0.80 = 0.20, es decir, el cliente pagará el 20% del precio original.
-  // Paso 3: Multiplicamos el precio original del juego ($precioOriginal) por este valor (1 - $descuento).
-  //         Esto da como resultado el precio final que el cliente pagará después de aplicar el descuento.
   $precioFinal = $precioOriginal * (1 - $descuento);
 
 
-  // Actualizar la cantidad vendida y el monto recaudado
+  //actualizar la cantidad vendida y el monto recaudado
   if (!isset($ventas[$juegoSeleccionado])) {
     $ventas[$juegoSeleccionado] = ['cantidad' => 0, 'recaudado' => 0];
   }
@@ -53,7 +40,7 @@ for ($i = 0; $i < 1000; $i++) {
 ?>
 
 <main class="flex w-full h-full bg-gray-50">
-  <!-- Aside con juegos disponibles -->
+
   <aside class="w-1/4 h-full overflow-y-auto bg-blue-800 p-4">
     <h2 class="text-2xl font-bold text-white mb-4 text-center">Juegos Disponibles</h2>
     <ul class="flex flex-col gap-y-4">
@@ -72,7 +59,7 @@ for ($i = 0; $i < 1000; $i++) {
     </ul>
   </aside>
 
-  <!-- Sección central con resultados del Hot Sale -->
+
   <section class="flex-1 flex flex-col items-center justify-center p-4">
     <h2 class="text-2xl font-bold mb-4 text-gray-800">Resultados del Hot Sale</h2>
     <article class="w-full max-w-4xl">
@@ -85,18 +72,22 @@ for ($i = 0; $i < 1000; $i++) {
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($ventas as $juego => $info): ?>
-            <tr class="hover:bg-blue-50">
-              <td class="border text-black border-gray-300 p-2"><?php echo $juego; ?></td>
-              <td class="border text-black border-gray-300 p-2"><?php echo $info['cantidad']; ?></td>
-              <td class="border text-black border-gray-300 p-2">$<?php echo number_format($info['recaudado'], 2); ?></td>
-            </tr>
-          <?php endforeach; ?>
+          <?php
+          foreach ($ventas as $juego => $info) {
+
+            echo '<tr class="hover:bg-blue-50">';
+            echo '<td class="border text-black border-gray-300 p-2">' . $juego . '</td>';
+            echo '<td class="border text-black border-gray-300 p-2">' . $info['cantidad'] . '</td>';
+            echo '<td class="border text-black border-gray-300 p-2">$' .  number_format($info['recaudado'], 2) . '</td>';
+            echo '</tr>';
+          }
+
+          ?>
         </tbody>
       </table>
     </article>
 
-    <!-- Monto total recaudado -->
+
     <section class="mt-4 p-4 bg-yellow-400 rounded shadow-md text-black text-center">
       <p class="mb-2">Monto total recaudado: $<span class="font-bold"><?php echo number_format($totalRecaudado, 2); ?></span></p>
     </section>

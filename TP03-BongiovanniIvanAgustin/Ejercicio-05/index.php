@@ -2,33 +2,23 @@
 
 <?php
 
-/* 
-Realice una página para simular un juego parecido al buscaminas. Para ello trabajaremos
-con una matriz 10x10 en la cual guardaremos de manera aleatoria los caracteres “-“ (guion
-medio para los espacios vacíos) o “B” (b larga para la bomba), pero solo debe haber 10
-bombas en toda la matriz.
-Luego de cargar la matriz, procederemos a realizar una partida del juego, para ello genere
-2 números aleatorios del 1 al 10, los cuales serían la coordenada de la matriz (fila y
-columna), esto se debe seguir repitiendo hasta que salga una bomba (letra B). Por cada
-espacio vacío que encontremos (un guion) se debe sumar un punto. Finalmente muestre
-los puntos obtenidos e indique las coordenadas de la bomba por la que perdió.
-*/
 
-$matriz = [];  // Matriz vacía
-$bombas = 0;   // Contador de bombas
 
-// Inicializar la matriz 10x10 con '-'
+$matriz = [];  // matriz vacia
+$bombas = 0;   // contador de bombas
+
+// inicializar la matriz 10x10 con '-'
 for ($i = 0; $i < 10; $i++) {
   $matriz[$i] = [];
   for ($j = 0; $j < 10; $j++) {
-    $matriz[$i][$j] = "-";  // Cada posición vacía es '-'
+    $matriz[$i][$j] = "-";  // cada posicion vacia es '-'
   }
 }
 
 
 while ($bombas < 10) {
-  $fila = rand(0, 9);    // Genera un número aleatorio para la fila (indice)
-  $columna = rand(0, 9); // Genera un número aleatorio para la columna (indice)
+  $fila = rand(0, 9);    // genera un numero aleatorio para la fila (indice)
+  $columna = rand(0, 9); // genera un numero aleatorio para la columna (indice)
 
   if ($matriz[$fila][$columna] === '-') {
     $matriz[$fila][$columna] = 'B';  // pongo la bomba en la posicionn de la matriz si esta vacia
@@ -36,16 +26,16 @@ while ($bombas < 10) {
   }
 }
 
-// Variables para el juego
+// variables para el juego
 $puntos = 0;
 $encontrada = false;
 $fila_bomba = 0;
 $columna_bomba = 0;
 
-// Simular el juego hasta que se encuentre una bomba
+// simular el juego hasta que se encuentre una bomba
 do {
-  $fila = rand(0, 9); // Genera un número aleatorio para la fila (indice)
-  $columna = rand(0, 9); // Genera un número aleatorio para la columna (indice)
+  $fila = rand(0, 9); // genera un numero aleatorio para la fila (indice)
+  $columna = rand(0, 9); // genera un numero aleatorio para la columna (indice)
 
   if ($matriz[$fila][$columna] === '-') {
     $puntos++;  // sumo puntos por cada vez que no se encuentre una bomba

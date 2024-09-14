@@ -4,23 +4,23 @@
 
 $miCarton = [3, 5, 7, 10, 12, 14, 15, 18, 20, 22];
 
-// Números posibles del sorteo sin repetir
+// numeros posibles del sorteo sin repetir
 $numerosSorteados = [];
 
-// Generar 10 números aleatorios del 1 al 22 sin repetir
-$numerosGenerados = 0; // Inicializar la variable para contar números generados
+// generar 10 numeros aleatorios del 1 al 22 sin repetir
+$numerosGenerados = 0; 
 
 while ($numerosGenerados < 10) {
   $numeroAleatorio = mt_rand(1, 22);
   if (!in_array($numeroAleatorio, $numerosSorteados)) {
     $numerosSorteados[] = $numeroAleatorio;
-    $numerosGenerados++; // Incrementar la cuenta de números generados
+    $numerosGenerados++; // incrementar la cuenta de números generados si es que no se repite
   }
 }
 
 
 
-// Contar aciertos 
+// esto es para ver cuantos aciertos hay, osea un contador 
 $aciertos = 0;
 
 foreach ($numerosSorteados as $numero) {
@@ -32,15 +32,15 @@ foreach ($numerosSorteados as $numero) {
 ?>
 
 <main class="flex justify-between items-center h-full p-10">
-  <!-- Sección del Cartón -->
+  
   <section class="w-full max-w-md grid place-items-center p-4 bg-orange-500 rounded-lg shadow-md">
     <h2 class="text-xl font-bold text-center mb-4">Mi Cartón</h2>
     <ul class="grid grid-cols-2 border-2 border-gray-400 rounded-lg overflow-hidden">
       <?php
-      // Mostrar el cartón en 5 filas y 2 columnas
+      
       for ($i = 0; $i < 10; $i++) {
         echo '<li class="flex justify-center items-center bg-gray-200 border-2 border-gray-400  h-16 w-16">';
-        echo "<span class='font-semibold text-black text-lg'>{$miCarton[$i]}</span>"; // Mostrar número
+        echo "<span class='font-semibold text-black text-lg'>{$miCarton[$i]}</span>"; 
         echo '</li>';
       }
       ?>
@@ -48,14 +48,13 @@ foreach ($numerosSorteados as $numero) {
   </section>
 
 
-  <!-- Sección del Cartón Ganador -->
+  
   <section class="w-full max-w-md grid place-items-center p-4 bg-orange-500 rounded-lg shadow-md">
     <h2 class="text-xl font-bold text-center mb-4">Sorteo</h2>
 
     <ul class="grid grid-cols-5 grid-rows-2 border-2 border-gray-400 rounded-lg overflow-hidden">
       <?php
-      // Mostrar los números sorteados
-      // Ordenar los números sorteados
+      
       sort($numerosSorteados);
       foreach ($numerosSorteados as $numero) {
         echo "<li class='flex justify-center items-center bg-green-500 border-2 border-gray-400  h-16 w-16'>";

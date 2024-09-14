@@ -4,11 +4,10 @@ Actua como un experto en desarrollo web, en php, css, tailwindcss y html5, sigue
 
 consigna:  
 
-crear 2 secciones dentro del main, una que teenga mi carton que son (números distribuidos en 5 filas y 2 columnas – utilice bucles)
-y la otra que muestre el carton ganador con la cantidad de aciertos
+crear una seccion dentro del main donde haya un recuadro centrado que diga contraseña geneerada y la contraseeña en verde 
 
 
-Solo dame la parte del medio osea lo que iria dentro del body, por ahora este es mi index.php.
+Solo dame la parte del medio osea lo que iria dentro del body con sus estilos en tailwindcss, por ahora este es mi index.php.
 
 <main class="flex justify-center h-full items-center">
 

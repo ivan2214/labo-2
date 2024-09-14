@@ -2,23 +2,23 @@
 
 
 <?php
-// Generar un número aleatorio entre 8 y 16 para la longitud de la contraseña
+//longitud de la contraseña
 $longitudContraseña = mt_rand(8, 16);
 
-// Variable para almacenar la contraseña generada
+//  contraseña generada
 $contraseñaSegura = '';
 
-// ASCII no permitidos
+// valores de ascii no permitidos en un array a mano
 $asciiNoPermitidos = [58, 59, 60, 61, 62, 63, 64, 91, 92, 93, 94, 95, 96, 123, 124, 125, 126];
 
-// Bucle para generar cada carácter
+
 for ($i = 0; $i < $longitudContraseña;) {
   $ascii = mt_rand(48, 122);
 
-  // Solo le añade el carácter si no es un valor ASCII no permitido (simbolos)
+  // solo le añade el carácter si no es un valor acii no permitido oseea los simbolos
   if (!in_array($ascii, $asciiNoPermitidos)) {
     $contraseñaSegura .= chr($ascii);
-    $i++; // Incrementar solo si se añade un carácter válido
+    $i++; // saco los incrementos del for para incrementar solo si se añade un caracter valido y si es asi entonces avanza el for y de esta forma no pierdo valores geneerados ya que vuelve en cada iteracion a generar un nuevo valor hasta que llega a la longitud deseada de la contraseña
   }
 }
 ?>
