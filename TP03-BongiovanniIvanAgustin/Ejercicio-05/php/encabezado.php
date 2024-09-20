@@ -20,7 +20,7 @@
 
 <body class="container flex flex-col justify-between mx-auto bg-zinc-700 text-white antialiased w-full h-full">
     <header class="text-center py-3 flex flex-col-reverse bg-zinc-900 gap-y-4">
-        <nav>
+    <nav>
             <ul class="flex justify-center gap-x-4">
                 <li class="transition-all duration-500 hover:text-blue-500">
                     <a href="http://localhost/Laboratorio-2/TP03-BongiovanniIvanAgustin/Ejercicio-02">
@@ -42,6 +42,23 @@
                         Ejercicio 05
                     </a>
                 </li>
+                <li class="transition-all duration-500 hover:text-blue-500">
+                    <a href="http://localhost/Laboratorio-2/TP03-BongiovanniIvanAgustin/Ejercicio-Opcionales-A">
+                        Opcional A
+                    </a>
+                </li>
+                <li class="transition-all duration-500 hover:text-blue-500">
+                    <a href="http://localhost/Laboratorio-2/TP03-BongiovanniIvanAgustin/Ejercicio-Opcionales-B">
+                        Opcional B
+                    </a>
+                </li>
+
+                <li class="transition-all duration-500 hover:text-blue-500">
+                    <a href="http://localhost/Laboratorio-2/TP03-BongiovanniIvanAgustin/Ejercicio-Opcionales-C">
+                        Opcional C
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <h1 class="text-4xl font-bold">Busca minas</h1>

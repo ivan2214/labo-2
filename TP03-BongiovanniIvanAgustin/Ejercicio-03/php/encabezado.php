@@ -42,6 +42,23 @@
                         Ejercicio 05
                     </a>
                 </li>
+                <li class="transition-all duration-500 hover:text-blue-500">
+                    <a href="http://localhost/Laboratorio-2/TP03-BongiovanniIvanAgustin/Ejercicio-Opcionales-A">
+                        Opcional A
+                    </a>
+                </li>
+                <li class="transition-all duration-500 hover:text-blue-500">
+                    <a href="http://localhost/Laboratorio-2/TP03-BongiovanniIvanAgustin/Ejercicio-Opcionales-B">
+                        Opcional B
+                    </a>
+                </li>
+
+                <li class="transition-all duration-500 hover:text-blue-500">
+                    <a href="http://localhost/Laboratorio-2/TP03-BongiovanniIvanAgustin/Ejercicio-Opcionales-C">
+                        Opcional C
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <figure class="mx-auto max-w-xs">
