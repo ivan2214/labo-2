@@ -14,7 +14,7 @@ while ($numerosGenerados < 10) {
   $numeroAleatorio = mt_rand(1, 22);
   if (!in_array($numeroAleatorio, $numerosSorteados)) {
     $numerosSorteados[] = $numeroAleatorio;
-    $numerosGenerados++; // incrementar la cuenta de números generados si es que no se repite
+    $numerosGenerados++; // incrementar la cuenta de numeros generados si es que no se repite
   }
 }
 
@@ -34,7 +34,7 @@ foreach ($numerosSorteados as $numero) {
 <main class="flex justify-between items-center h-full p-10">
   
   <section class="w-full max-w-md grid place-items-center p-4 bg-orange-500 rounded-lg shadow-md">
-    <h2 class="text-xl font-bold text-center mb-4">Mi Cartón</h2>
+    <h2 class="text-xl font-bold text-center mb-4">Mi Carton</h2>
     <ul class="grid grid-cols-2 border-2 border-gray-400 rounded-lg overflow-hidden">
       <?php
       

@@ -3,7 +3,7 @@
 <?php
 
 require_once('php/juegos.php');
-// variables para el conteo de ventas, recaudación y descuento
+// variables para el conteo de ventas, recaudacion y descuento
 $ventas = [];
 $totalRecaudado = 0;
 $descuento = 0.0;
@@ -14,7 +14,7 @@ for ($i = 0; $i < 1000; $i++) {
   $juegoSeleccionado = array_rand($juegos); // seleccionar un juego al azar para la venta
   $precioOriginal = $juegos[$juegoSeleccionado]; // obtengo el precio original del juego
 
-  // calcular el descuento basado en el número de ventas 
+  // calcular el descuento basado en el numero de ventas 
   if ($i < 10) {
     $descuento = 0.80; // 80% de descuento
   } elseif ($i < 200) {
