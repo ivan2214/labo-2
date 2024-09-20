@@ -31,7 +31,7 @@
       <!-- Lista de Días de la Semana -->
       <fieldset>
         <legend class="block text-lg font-medium text-slate-500">Días de la semana</legend>
-        <ul class="space-y-2">
+        <ul class="space-y-2 text-slate-200">
           <li>
             <label class="inline-flex items-center">
               <input type="checkbox" name="dias[]" value="lunes" class="form-checkbox">
