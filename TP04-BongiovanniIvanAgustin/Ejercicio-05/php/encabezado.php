@@ -42,7 +42,7 @@
                         Ejercicio 05
                     </a>
                 </li>
-                <li class="transition-all duration-500 hover:text-blue-500">
+               <!--  <li class="transition-all duration-500 hover:text-blue-500">
                     <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-Opcionales-A">
                         Opcional A
                     </a>
@@ -57,7 +57,7 @@
                     <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-Opcionales-C">
                         Opcional C
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </nav>
