@@ -4,7 +4,7 @@
 
 <?php
 
-$numero = "";
+$numero = 0;
 $operacion = "";
 $resultadoOperacion = 0;
 if (!empty($_POST['numero'])) {
