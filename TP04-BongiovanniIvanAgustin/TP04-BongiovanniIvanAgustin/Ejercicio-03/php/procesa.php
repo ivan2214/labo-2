@@ -24,7 +24,7 @@ if (!empty($_POST["horas-trabajadas"]) && !empty($_POST["turno"]) && !empty($_PO
             <header class="font-bold text-xl text-gray-300">Horas trabajadas</header>
 
             <?php
-            if ($horasTrabajadas) {
+            if ($horasTrabajadas > 0) {
                 echo '<p aria-label="Horas trabajadas" class="text-yellow-400">' . $horasTrabajadas . ' horas</p>';
             } else {
                 echo '<p aria-label="Horas trabajadas" class="text-yellow-400">Introduce las horas</p>';
@@ -61,11 +61,12 @@ if (!empty($_POST["horas-trabajadas"]) && !empty($_POST["turno"]) && !empty($_PO
                     if (!empty($horasTrabajadas) && !empty($turno) && !empty($dias)) {
                         foreach ($dias as $dia) {
                             $honorario = pagoDiario($horasTrabajadas, $turno, $dia);
+                            $honorarioString = (string) $honorario;
                             echo '<tr>';
 
                             echo '<td class="border border-gray-300 px-4 py-2">' . $dia . '</td>';
 
-                            echo '<td class="border border-gray-300 px-4 py-2">$' . $honorario . '</td>';
+                            echo '<td class="border border-gray-300 px-4 py-2">$' . number_format($honorarioString, 2, ",", ".") . '</td>';
 
                             echo '</tr>';
                         }
@@ -89,7 +90,7 @@ if (!empty($_POST["horas-trabajadas"]) && !empty($_POST["turno"]) && !empty($_PO
                             }
 
 
-                            echo '<td class="border border-gray-300 px-4 py-2">$' . $total . '</td>';
+                            echo '<td class="border border-gray-300 px-4 py-2">$' . number_format($total, 2, ",", ".") . '</td>';
                         } else {
                             echo '<td class="border border-gray-300 px-4 py-2">$0</td>';
                         }

@@ -1,11 +1,6 @@
 <?php require_once('php/encabezado.php'); ?>
 
 
-<?php
-
-?>
-
-
 
 <main class="flex justify-center h-full items-center py-5">
   <section class="w-full max-w-lg">
@@ -16,11 +11,11 @@
     <hr class="my-4 border-gray-300">
 
     <form action="php/procesa.php" method="POST" class="space-y-4">
-      <!-- Campo Horas Trabajadas -->
-      <label for="horas-trabajadas" class="block text-lg font-medium text-slate-500">Horas trabajadas</label>
-      <input type="number" id="horas-trabajadas" name="horas-trabajadas" placeholder="0" class="w-full px-1 py-0.5 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-slate-400 text-slate-500" required>
 
-      <!-- Campo Select Turno -->
+      <label for="horas-trabajadas" class="block text-lg font-medium text-slate-500">Horas trabajadas</label>
+      <input min="0" max="999" type="number" id="horas-trabajadas" name="horas-trabajadas" placeholder="0" class="w-full px-1 py-0.5 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-slate-400 text-slate-500" required>
+
+
       <label for="turno" class="block text-lg font-medium text-slate-500">Turno</label>
       <select id="turno" name="turno" class="w-full px-1 py-0.5 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
         <option value="">Selecciona un turno</option>
@@ -28,7 +23,7 @@
         <option value="nocturno">Nocturno</option>
       </select>
 
-      <!-- Lista de Días de la Semana -->
+
       <fieldset>
         <legend class="block text-lg font-medium text-slate-500">Días de la semana</legend>
         <ul class="space-y-2 text-slate-200">
@@ -77,7 +72,7 @@
         </ul>
       </fieldset>
 
-      <!-- Botón Calcular -->
+
       <button type="submit" class="block mx-auto px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Calcular</button>
     </form>
   </section>

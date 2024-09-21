@@ -46,8 +46,8 @@ if ($plazo > 0 && $deposito > 0) {
                 <tr>
                     <td class="py-2 px-4 border-b"><?php echo $deposito; ?></td>
                     <td class="py-2 px-4 border-b"><?php echo $plazo . " días"; ?></td>
-                    <td class="py-2 px-4 border-b"><?php echo number_format($intereses, 2); ?></td>
-                    <td class="py-2 px-4 border-b"><?php echo number_format($montoTotal, 2); ?></td>
+                    <td class="py-2 px-4 border-b"><?php echo number_format($intereses, 2, ",", "."); ?></td>
+                    <td class="py-2 px-4 border-b"><?php echo number_format($montoTotal, 2, ",", "."); ?></td>
                 </tr>
             </tbody>
         </table>

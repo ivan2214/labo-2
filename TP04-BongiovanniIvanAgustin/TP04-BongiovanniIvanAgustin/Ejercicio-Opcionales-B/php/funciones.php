@@ -16,3 +16,15 @@ function aleatorioSinRepetir($cantidad, $desde, $hasta)
 
     return $numeros;
 }
+
+
+function contadorAciertos($numerosParticipante, $numerosSorteo)
+{
+    $aciertos = 0;
+    foreach ($numerosParticipante as $numeroParticipante) {
+        if (in_array($numeroParticipante, $numerosSorteo)) {
+            $aciertos++;
+        }
+    }
+    return $aciertos;
+}

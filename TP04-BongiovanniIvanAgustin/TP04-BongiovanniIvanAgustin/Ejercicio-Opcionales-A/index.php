@@ -6,7 +6,7 @@
     <form action="php/procesar.php" method="POST">
       <section class="flex justify-center items-center gap-4">
         <label for="numero" class="block text-sm font-medium text-gray-700">Ingrese un numero</label>
-        <input type="numero" id="numero" name="numero" required class="block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <input type="text" id="numero" name="numero" required class="block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
       </section>
 
 
