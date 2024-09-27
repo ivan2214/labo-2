@@ -7,18 +7,18 @@ require_once 'php/encabezado.php';
 const ALICUOTA = 2.5;
 
 // Transferencias entrantes aleatorias
-$incoming1 = mt_rand(220000, 350000);
-$incoming2 = mt_rand(220000, 350000);
+$trans1 = mt_rand(220000, 350000);
+$trans2 = mt_rand(220000, 350000);
 
 // calculo de retencion de ingresos brutos aplicado en las 2 transferencias
-$bruto1 = $incoming1 * ALICUOTA / 100;
-$bruto2 = $incoming2 * ALICUOTA / 100;
+$bruto1 = $trans1 * ALICUOTA / 100;
+$bruto2 = $trans2 * ALICUOTA / 100;
 
 // variables salientes con valores aleatorios entre 80.000 y 130.000
-$sale1 = mt_rand(80000, 130000);
-$sale2 = mt_rand(80000, 130000);
+$salida1 = mt_rand(80000, 130000);
+$salida2 = mt_rand(80000, 130000);
 
-$saldo = ($incoming1 + $incoming2) - ($bruto1 + $bruto2) - ($sale1 + $sale2);
+$saldo = ($trans1 + $trans2) - ($bruto1 + $bruto2) - ($salida1 + $salida2);
 
 
 ?>
@@ -38,7 +38,7 @@ $saldo = ($incoming1 + $incoming2) - ($bruto1 + $bruto2) - ($sale1 + $sale2);
         <tr>
           <td>Transferencia entrante</td>
           <td>+
-            <?php echo " $" . number_format($incoming1, 2, ",", ".");
+            <?php echo " $" . number_format($trans1, 2, ",", ".");
             ?>
           </td>
         </tr>
@@ -53,7 +53,7 @@ $saldo = ($incoming1 + $incoming2) - ($bruto1 + $bruto2) - ($sale1 + $sale2);
           <td>Transferencia entrante</td>
           <td>+
             <?php
-            echo " $" . number_format($incoming2, 2, ",", ".");
+            echo " $" . number_format($trans2, 2, ",", ".");
             ?>
           </td>
         </tr>
@@ -68,15 +68,14 @@ $saldo = ($incoming1 + $incoming2) - ($bruto1 + $bruto2) - ($sale1 + $sale2);
           <td>Transferencia saliente</td>
           <td>-
             <?php
-            $sale1 = mt_rand(80000, 130000);
-            echo " $" . number_format($sale1, 2, ",", ".");
+            echo " $" . number_format($salida1, 2, ",", ".");
             ?></td>
         </tr>
         <tr>
           <td>Transferencia saliente</td>
           <td>-
             <?php
-            echo " $" . number_format($sale2, 2, ",", ".");
+            echo " $" . number_format($salida2, 2, ",", ".");
             ?></td>
         </tr>
         <tr>
