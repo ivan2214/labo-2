@@ -6,7 +6,7 @@ require_once("funciones.php");
 $horasTrabajadas = "";
 $turno = "";
 $dias = [];
-$nombre = ""; // Cambié el nombre de la variable a $nombre para mayor claridad
+$nombre = "";
 
 if (!empty($_POST["horas-trabajadas"]) && !empty($_POST["turno"]) && !empty($_POST["dias"]) && !empty($_POST["nombre"])) {
 
@@ -17,20 +17,23 @@ if (!empty($_POST["horas-trabajadas"]) && !empty($_POST["turno"]) && !empty($_PO
 
 
     $carpeta = '../txt/';
+    // si no existe la carpeta la creo para meter los archivos
     if (!file_exists($carpeta)) {
         mkdir($carpeta);
     }
+    // nombree para el archivo a guardar
     $nombreArchivo = 'pagos.txt';
 
-
+    // abrimos el archivo 
     $archivo = fopen($carpeta . $nombreArchivo, 'a');
     if ($archivo) {
         foreach ($dias as $dia) {
             // calculo el honorario por cada día trabajado
             $honorario = pagoDiario($horasTrabajadas, $turno, $dia);
             // guardo la información en el formato nombre;horas;turno;dia;honorario
-            $linea = $nombre . ';' . $horasTrabajadas . ';' . $turno . ';' . $dia . ';' . $honorario . PHP_EOL;
-            $control = fputs($archivo, $linea);
+            $datos = [$nombre, $horasTrabajadas, $turno, $dia, $honorario];
+            $linea = implode(";", $datos);
+            fputs($archivo, $linea . PHP_EOL);
         }
         fclose($archivo);
     } else {
