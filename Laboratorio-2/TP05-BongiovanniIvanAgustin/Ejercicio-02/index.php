@@ -10,10 +10,13 @@
 
     <hr class="my-4 border-gray-300">
 
-    <form action="php/procesa.php" method="POST" class="space-y-4">
+    <form action="php/procesa.php" method="POST" class="">
+
+      <label for="nombre" class="block text-lg font-medium text-slate-500">Nombre</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Escriba el nombre" class="w-full px-1 py-0.5 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-slate-400 text-slate-500" required>
 
       <label for="horas-trabajadas" class="block text-lg font-medium text-slate-500">Horas trabajadas</label>
-      <input min="0" max="999" type="number" id="horas-trabajadas" name="horas-trabajadas" placeholder="0" class="w-full px-1 py-0.5 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-slate-400 text-slate-500" required>
+      <input min="1" max="999" type="number" id="horas-trabajadas" name="horas-trabajadas" placeholder="0" class="w-full px-1 py-0.5 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-slate-400 text-slate-500" required>
 
 
       <label for="turno" class="block text-lg font-medium text-slate-500">Turno</label>

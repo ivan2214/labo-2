@@ -9,17 +9,18 @@ if (!empty($_GET['usuario'])) {
 
 
 
-$img = ""; // Inicializar la variable de formato
+$img = "";
 
-// Abrir el archivo de usuarios
+// abro el archivo de usuarios
 $archivo = fopen('../usuarios.txt', 'r');
 if ($archivo) {
-    while (($linea = fgets($archivo)) !== false) {
-        $datos = explode(';', trim($linea)); // Separar los datos
-        if ($datos[0] === $usuario) {
-
-            $img = $datos[2]; // Obtener el nombre de la imagen
-            break; // Salir del bucle si se encuentra el usuario
+    while (!feof($archivo)) {
+        $linea = fgets($archivo); // obtiene una linea del archivo
+        if ($linea != "") { // si la linea no es vacia
+            $datos = explode(';', trim($linea)); // separo la linea en un array
+            if ($datos[0] == $usuario) {
+                $img = $datos[2];
+            }
         }
     }
     fclose($archivo);
@@ -32,13 +33,13 @@ $foto = "../img/" .  $img;
 
 
 <main>
-    <header>
-        <h1>Bienvenido, <?php echo $usuario; ?></h1>
-        <?php if (file_exists($foto)): ?>
-            <img src="<?php echo $foto; ?>" alt="Foto de <?php echo $usuario; ?>" />
-        <?php else: ?>
-            <p>No se encontró la foto.</p>
-        <?php endif; ?>
+    <header class="flex items-center justify-end bg-zinc-500 shadow">
+        <section class="flex items-center gap-x-4 px-4 py-2">
+            <h2 class="text-xl font-semibold"><?= $usuario ?></h2>
+            <figure class="w-12 h-12 rounded-full border">
+                <img class="w-12 h-12 rounded-full p-1" src="<?= $foto ?>" alt="Foto de perfil del usuario">
+            </figure>
+        </section>
     </header>
 </main>
 

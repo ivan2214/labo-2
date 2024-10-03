@@ -23,38 +23,43 @@
         <nav class="text-white">
             <ul class="flex justify-center gap-x-4">
                 <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-02">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-01">
+                        Ejercicio 01
+                    </a>
+                </li>
+                <li class="transition-all duration-500 hover:text-blue-500">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-02">
                         Ejercicio 02
                     </a>
                 </li>
                 <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-03">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-03">
                         Ejercicio 03
                     </a>
                 </li>
                 <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-04">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-04">
                         Ejercicio 04
                     </a>
                 </li>
                 <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-05">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-05">
                         Ejercicio 05
                     </a>
                 </li>
-            <!--     <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-Opcionales-A">
+                <!--     <li class="transition-all duration-500 hover:text-blue-500">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-Opcionales-A">
                         Opcional A
                     </a>
                 </li>
                 <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-Opcionales-B">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-Opcionales-B">
                         Opcional B
                     </a>
                 </li>
 
                 <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-Opcionales-C">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-Opcionales-C">
                         Opcional C
                     </a>
                 </li>
