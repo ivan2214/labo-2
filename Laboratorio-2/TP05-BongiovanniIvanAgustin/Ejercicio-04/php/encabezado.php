@@ -20,41 +20,29 @@
 
 <body class="container flex flex-col justify-between mx-auto bg-zinc-700  antialiased w-full h-full">
     <header class="text-center py-3 flex flex-col-reverse gap-y-4 bg-zinc-900 text-white">
-        <nav>
+        <nav class="text-white">
             <ul class="flex justify-center gap-x-4">
                 <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-02">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-01">
+                        Ejercicio 01
+                    </a>
+                </li>
+                <li class="transition-all duration-500 hover:text-blue-500">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-02">
                         Ejercicio 02
                     </a>
                 </li>
                 <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-03">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-03">
                         Ejercicio 03
                     </a>
                 </li>
                 <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-04">
+                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-04">
                         Ejercicio 04
                     </a>
                 </li>
-                <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-05">
-                        Ejercicio 05
-                    </a>
-                </li>
-                <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-Opcionales-A">
-                        Opcional A
-                    </a>
-                </li>
-                <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/Laboratorio-2/TP04-BongiovanniIvanAgustin/Ejercicio-Opcionales-B">
-                        Opcional B
-                    </a>
-                </li>
-
-
             </ul>
         </nav>
-        <h1 class="text-4xl font-bold">Login</h1>
+        <h1 class="text-4xl font-bold">Consulta sueldos</h1>
     </header>

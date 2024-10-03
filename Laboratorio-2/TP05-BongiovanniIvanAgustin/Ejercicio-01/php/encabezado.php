@@ -20,9 +20,8 @@
 
 <body class="container flex flex-col justify-between mx-auto bg-zinc-700  antialiased w-full h-full">
     <header class="text-center py-3 flex flex-col-reverse gap-y-4 bg-zinc-900 text-white">
-        <nav>
+        <nav class="text-white">
             <ul class="flex justify-center gap-x-4">
-
                 <li class="transition-all duration-500 hover:text-blue-500">
                     <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-01">
                         Ejercicio 01
@@ -43,29 +42,7 @@
                         Ejercicio 04
                     </a>
                 </li>
-                <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-05">
-                        Ejercicio 05
-                    </a>
-                </li>
-                <!--    <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-Opcionales-A">
-                        Opcional A
-                    </a>
-                </li>
-                <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-Opcionales-B">
-                        Opcional B
-                    </a>
-                </li>
-
-                <li class="transition-all duration-500 hover:text-blue-500">
-                    <a href="http://localhost/facultad/Laboratorio-2/TP05-BongiovanniIvanAgustin/Ejercicio-Opcionales-C">
-                        Opcional C
-                    </a>
-                </li>
- -->
             </ul>
         </nav>
-        <h1 class="text-4xl font-bold">Notas parcial</h1>
+        <h1 class="text-4xl font-bold">Login</h1>
     </header>
