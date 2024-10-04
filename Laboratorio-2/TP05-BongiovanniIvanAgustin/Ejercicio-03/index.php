@@ -17,7 +17,7 @@
         id="nombre"
         name="nombre"
         class="w-full p-2 border border-gray-300 rounded mb-4"
-        placeholder="Ingrese su depósito inicial"
+        placeholder="Escribe el nombre del usuario"
         required />
 
 
