@@ -3,11 +3,11 @@ $legajoDesdeForm = "";
 $legajoEncontrado = false;
 $apellido = "";
 $nombre = "";
-$sueldo = "";
+$sueldo = 0;
 
 if (!empty($_POST['legajo'])) {
     $legajoDesdeForm = $_POST['legajo'];
-    // El archivo CSV tiene la forma: legajo;apellido;nombre;sueldo
+    // legajo;apellido;nombre;sueldo
     $ubicacion = "../csv/";
     $nombreArchivo = "sueldos.csv";
     $ubicacionCompleta = $ubicacion . $nombreArchivo;
@@ -24,7 +24,7 @@ if (!empty($_POST['legajo'])) {
                     $legajoEncontrado = true;
                     $apellido = $partes[1];
                     $nombre = $partes[2];
-                    $sueldo = $partes[3];
+                    $sueldo = (float)$partes[3];
                 }
             }
         }
@@ -34,19 +34,20 @@ if (!empty($_POST['legajo'])) {
     if (!$legajoEncontrado) {
 
         header('refresh:2;url=../index.php');
+        require_once('encabezado.php');
         echo '<main class="flex justify-center h-full items-center">';
         echo '<section class="bg-white p-6 rounded shadow-md w-full max-w-sm">';
         echo "<p>Legajo inexistente</p>";
         echo '</section>';
         echo '</main>';
+        require_once('pie.php');
     }
 }
 ?>
 
+
 <?php
-
 require_once('encabezado.php');
-
 ?>
 
 
