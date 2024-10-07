@@ -1,44 +1,44 @@
 <?php
-function obtenerPagos($nombre)
-{
-    $ubicacion = "../txt/";
-    $archivoNombre = "pagos.txt";
-    $ubicacionArchivo = $ubicacion . $archivoNombre;
 
-    // Inicializar el arreglo asociativo
+function buscarPagos($nombre)
+{
+    $ubicacionCarpeta = "../../Ejercicio-02/txt/"; // busco el txt del punto anterior para no estar copiando y pegando la carpeta del archivo
+    $nombreArchivo = "pagos.txt";
+    $archivo = fopen($ubicacionCarpeta . $nombreArchivo, "r");
     $pagos = [];
 
-    // Verificar si el archivo existe
-    if (file_exists($ubicacionArchivo)) {
-        $archivo = fopen($ubicacionArchivo, "r");
-
-        while (!feof($archivo)) {
-            $linea = fgets($archivo);
-            $partes = explode(";", trim($linea)); // Trimming para eliminar espacios
-
-            // Verificar que haya suficientes partes y si el nombre coincide
-            if (count($partes) >= 5 && $partes[0] == $nombre) {
-                $horas = intval($partes[1]); // Horas en la segunda posición
-                $dia = $partes[3]; // Día en la cuarta posición
-                $honorario = floatval($partes[4]); // Honorario en la quinta posición
-
-                // Si el día ya existe, acumular horas y honorarios
-                if (isset($pagos[$dia])) {
-                    $pagos[$dia]['horas'] += $horas;
-                    $pagos[$dia]['honorario'] += $honorario; // Acumular honorarios si el día ya existe
-                } else {
-                    // Asignar valores iniciales
-                    $pagos[$dia] = [
-                        'horas' => $horas,
-                        'honorario' => $honorario
-                    ];
+    while (!feof($archivo)) {
+        $linea = fgets($archivo);
+        if ($linea != "") {
+            $datos = explode(";", trim($linea));
+            //nombre;horaTrabajada;turno;dia;honorario
+            // obtengo el nombre que esta en el archivo guardado
+            $nombreArchivo = $datos[0];
+            // si el nombre del archivo y el el nombre que me pasan por parametro coinciden se hace el trabajo sino no
+            if ($nombre == $nombreArchivo) {
+                $dias = explode(",", trim($datos[3]));
+                $honorarios = $datos[4];
+                foreach ($dias as $dia) {
+                    if (array_key_exists($dia, $pagos)) {
+                        $pagos[$dia] += $honorarios;
+                    } else {
+                        $pagos[$dia] = $honorarios;
+                    }
                 }
             }
         }
+    }
+    fclose($archivo);
 
-        fclose($archivo);
-    } else {
-        echo "El archivo no existe.";
+    foreach ($pagos as $clave => $valor) {
+        // verifico que si no existe la clave en el arreglo pagos entonces la inicializo en cero
+        if (!array_key_exists("total", $pagos)) {
+            $pagos["total"] = 0;
+        }
+        // si clave es distinta a total entonces se suma al total ya que las demas son dias 
+        if ($clave != "total") {
+            $pagos["total"] += $valor;
+        }
     }
 
     return $pagos;
