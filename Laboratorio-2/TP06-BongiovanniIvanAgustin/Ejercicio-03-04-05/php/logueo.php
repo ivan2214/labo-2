@@ -20,8 +20,8 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $conexion = conectar();
 
     if (!$conexion) {
+        header("refresh:1;url=../index.php");
         echo '<p>No se ha podido conectar con la base de datos</p>';
-        header("refresh:0;url=../index.php");
     }
 
 
@@ -32,21 +32,27 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     mysqli_stmt_bind_param($sentencia, 'ss', $usernameFromForm, $passwordFromForm);
 
 
-    mysqli_stmt_execute($sentencia);
+    $q = mysqli_stmt_execute($sentencia);
 
 
-    mysqli_stmt_bind_result($sentencia, $username, $password);
+    mysqli_stmt_bind_result($sentencia, $usernameDB, $passwordDB);
 
-    while (mysqli_stmt_fetch($sentencia)) {
-        if ($username == $usernameFromForm && $password == $passwordFromForm) {
-            // pasar usuario por url a articulo_listado.php
-            header("refresh:1;url=articulo_listado.php?usuario=" . $username);
+    if ($q) {
+        mysqli_stmt_fetch($sentencia);
+
+        if (!empty($usernameDB) && !empty($passwordDB)) {
+
+            header("refresh:0;url=articulo_listado.php?usuario=" . $usernameDB);
+            echo '<p>Acceso concedido redirigiendo!</p>';
         } else {
-            header("refresh:0;url=../index.php");
+            header("refresh:1;url=../index.php");
             echo '<p>Error usuario o contraseña incorrectos</p>';
         }
     }
+
+
     desconectar($conexion);
 } else {
-    header("refresh:0;url=../index.php");
+    header("refresh:1;url=../index.php");
+    echo '<p>Los campos no pueden estar vacios</p>';
 }
