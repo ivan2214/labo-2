@@ -83,13 +83,13 @@ if (!empty($_GET["usuario"])) {
                             echo '<p>No se ha podido conectar con la base de datos</p>';
                         } else {
 
-                            $consulta = "SELECT nombre, categoria, precio, foto FROM articulo"; // consulta
+                            $consulta = "SELECT id_articulo, nombre, categoria, precio, foto FROM articulo"; // consulta
 
                             $sentencia = mysqli_prepare($conexion, $consulta); // prepara la sentencia
 
                             $q = mysqli_stmt_execute($sentencia); // ejecuta la sentencia
 
-                            mysqli_stmt_bind_result($sentencia, $nombre, $categoria, $precio, $foto); // asocia los resultados
+                            mysqli_stmt_bind_result($sentencia, $id, $nombre, $categoria, $precio, $foto); // asocia los resultados
 
                             if ($q) {
 
@@ -115,12 +115,12 @@ if (!empty($_GET["usuario"])) {
                                         echo '<td>' . $categoria . '</td>';
                                         echo '<td>$ ' . number_format($precio, 0, ",", ".") . '</td>';
                                         echo  '<td >
-                    <a  href="articulo_modificar.php?usuario=' . $usuarioDB . '&articulo=' . $nombre . '">
+                    <a  href="articulo_modificar.php?usuario=' . $usuarioDB . '&id=' . $id . '">
                     <img src="../img/modificar.png" alt="Imagen del artículo" >
                     </a>
                     </td>';
                                         echo  '<td >
-                    <a  href="articulo_eliminar.php?usuario=' . $usuarioDB . '&articulo=' . $nombre . '">
+                    <a  href="articulo_eliminar.php?usuario=' . $usuarioDB . '&id=' . $id . '">
                     <img src="../img/eliminar.png" alt="Imagen del artículo" >
                     </a>
                     </td>';

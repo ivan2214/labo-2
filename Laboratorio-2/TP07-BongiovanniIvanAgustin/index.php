@@ -1,5 +1,5 @@
 <?php
-$ruta = 'css/';
+$ruta = '';
 require("php/encabezado.php");
 ?>
 <main class="d-flex justify-content-center align-items-center login">
