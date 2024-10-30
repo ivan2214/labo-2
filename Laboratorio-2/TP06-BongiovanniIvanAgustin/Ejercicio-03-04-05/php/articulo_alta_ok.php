@@ -14,7 +14,6 @@ if (!empty($_POST['nombre']) && !empty($_POST['categoria']) && !empty($_POST['pr
         $extensionImage = explode("/", $_FILES["imagen"]["type"])[1];
         $nombreImagen = $nombre . "." . $extensionImage;
         $conImagen = true;
-
     } else {
         $conImagen = false;
         $nombreImagen = "";
@@ -29,7 +28,6 @@ if (!empty($_POST['nombre']) && !empty($_POST['categoria']) && !empty($_POST['pr
         echo '<p>No se ha podido conectar con la base de datos</p>';
     } else {
         // creo la consulta con la espera de las variables
-
         $consulta = "INSERT INTO articulo(nombre,categoria,precio,foto)
                      VALUES (?,?,?,?)
                     ";
@@ -63,7 +61,7 @@ if (!empty($_POST['nombre']) && !empty($_POST['categoria']) && !empty($_POST['pr
                     header("refresh:1;url=articulo_alta.php?usuario=" . $usuarioURL);
                     echo '<p>Error al guardar</p>';
                 }
-            }else{
+            } else {
                 header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioURL);
                 echo '<p>Guardado exitoso </p>';
             }
@@ -73,13 +71,5 @@ if (!empty($_POST['nombre']) && !empty($_POST['categoria']) && !empty($_POST['pr
         }
 
         desconectar($conexion);
-
     }
-
-
-
-
 }
-
-
-?>

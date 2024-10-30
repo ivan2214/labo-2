@@ -38,13 +38,7 @@ if (!empty($_GET["usuario"])) {
         }
 
         desconectar($conexion);
-
     }
-
-
-
-
-
 }
 
 ?>
@@ -86,13 +80,13 @@ if (!empty($_GET["usuario"])) {
                     } else {
 
                         $consulta = "SELECT nombre, categoria, precio, foto FROM articulo"; // consulta
-                    
+
                         $sentencia = mysqli_prepare($conexion, $consulta); // prepara la sentencia
-                    
+
                         $q = mysqli_stmt_execute($sentencia); // ejecuta la sentencia
-                    
+
                         mysqli_stmt_bind_result($sentencia, $nombre, $categoria, $precio, $foto); // asocia los resultados
-                    
+
                         if ($q) {
 
                             mysqli_stmt_store_result($sentencia); // almacena los resultados
@@ -105,7 +99,7 @@ if (!empty($_GET["usuario"])) {
 
                             if ($cantFilas > 0) {
                                 //si obtuve resultados entonces los voy a iterar y los mostrare por pantalla en la tabla
-                                // esto va uno por uno no lo devuelve como un array sino que es independiente del anterior podria guardar en un array los valores e iterarlos luego tambien (es una opcion)
+                                // esto va uno por uno no lo devuelve como un array sino que es independiente del anterior podria guardar en un array los valores e iterarlos luego tambien (es una opcion) (Nota para el que corrige: escribo esto para acordarme como vuelven los datos)
                                 while (mysqli_stmt_fetch($sentencia)) {
                                     if ($foto == '' || $foto == NULL || empty($foto)) {
                                         $foto = "sin_imagen.png";

@@ -21,7 +21,7 @@ $usuarioURL = $_GET["usuario"];
                 <input type="number" step="0.01" id="precio" name="precio" class="form-control mb-3" required>
 
                 <label for="imagen" class="form-label">Subir imagen del artículo</label>
-                <input type="file" id="imagen" name="imagen" class="form-control mb-4" >
+                <input type="file" id="imagen" name="imagen" class="form-control mb-4">
 
                 <button type="submit" class="btn btn-primary w-100">Dar de alta</button>
             </fieldset>
