@@ -1,5 +1,5 @@
 <?php
-$usuarioURL = $_GET["usuario"];
+$usuarioNombre = $_GET["usuarioFoto"];
 
 if (!empty($_POST['id']) && !empty($_POST['nombre']) && !empty($_POST['categoria']) && !empty($_POST['precio'])) {
     $conImagen = false;
@@ -7,42 +7,46 @@ if (!empty($_POST['id']) && !empty($_POST['nombre']) && !empty($_POST['categoria
     $nombre = $_POST['nombre'];
     $categoria = $_POST['categoria'];
     $precio = (float) $_POST['precio'];
-    $nombreImagen = "";
+    $fotoVieja = $_POST['fotoVieja'];
+    $nombreImagenNueva = "";
+
+    $ubicacionArchivo = "../img/articulos/" . $fotoVieja;
+
+    if (!empty($fotoVieja)) {
+        unlink($ubicacionArchivo);
+    }
 
     if (!empty($_FILES["imagen"]["size"])) {
         $extensionImage = explode("/", $_FILES["imagen"]["type"])[1];
-        $nombreImagen = $nombre . "." . $extensionImage;
+        $nombreImagenNueva = $nombre . "." . $extensionImage;
         $conImagen = true;
     } else {
         $conImagen = false;
-        $nombreImagen = "";
+        $nombreImagenNueva = "";
     }
 
     require_once 'conexion.php';
     $conexion = conectar();
     if (!$conexion) {
-        header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioURL);
+        header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioNombre);
         echo '<p>Error al conectar con la base de datos</p>';
     } else {
 
         if ($conImagen) {
             $rutaOrigen = $_FILES["imagen"]["tmp_name"];
-            $rutaDestino = "../img/articulos/" . $nombreImagen;
+            $rutaDestino = "../img/articulos/" . $nombreImagenNueva;
             $envio = move_uploaded_file($rutaOrigen, $rutaDestino);
 
-            if ($envio) {
-                $consulta = "UPDATE articulo SET nombre = ?, categoria = ?, precio = ?, foto = ? WHERE id_articulo = ?";
-                $sentencia = mysqli_prepare($conexion, $consulta);
-                mysqli_stmt_bind_param($sentencia, 'ssisi', $nombre, $categoria, $precio, $nombreImagen, $id);
-            } else {
-                header("refresh:1;url=articulo_modificar.php?id=" . $id . "&usuario=" . $usuarioURL);
-                echo '<p>Error al subir la imagen</p>';
+            if (!$envio) {
+                header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioNombre);
+                echo '<p>Error al guardar imagen</p>';
             }
-        } else {
-            $consulta = "UPDATE articulo SET nombre = ?, categoria = ?, precio = ? WHERE id_articulo = ?";
-            $sentencia = mysqli_prepare($conexion, $consulta);
-            mysqli_stmt_bind_param($sentencia, 'ssii', $nombre, $categoria, $precio, $id);
+
         }
+
+        $consulta = "UPDATE articulo SET nombre = ?, categoria = ?, precio = ?, foto = ? WHERE id_articulo = ?";
+        $sentencia = mysqli_prepare($conexion, $consulta);
+        mysqli_stmt_bind_param($sentencia, 'ssisi', $nombre, $categoria, $precio, $nombreImagenNueva, $id);
 
         $resultado = mysqli_stmt_execute($sentencia);
         mysqli_stmt_close($sentencia);
@@ -50,14 +54,14 @@ if (!empty($_POST['id']) && !empty($_POST['nombre']) && !empty($_POST['categoria
 
 
         if ($resultado) {
-            header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioURL);
+            header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioNombre);
             echo '<p>Modificación exitosa</p>';
         } else {
-            header("refresh:1;url=articulo_modificar.php?id=" . $id . "&usuario=" . $usuarioURL);
+            header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioNombre);
             echo '<p>Error al modificar el artículo</p>';
         }
     }
 } else {
-    header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioURL);
+    header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioNombre);
     echo '<p>Información incompleta para la modificación</p>';
 }
