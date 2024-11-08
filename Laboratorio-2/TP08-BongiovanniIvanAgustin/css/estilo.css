@@ -1,0 +1,52 @@
+
+body {
+    background-color: #63A6A1;
+    color: #403834;
+}
+
+header {
+    background-color: #ffffff;
+}
+
+h1 {
+    color: #917263;
+}
+
+form {
+    background-color: #403834;
+    color: #ffffff;
+}
+
+input {
+    background-color: #917263;
+    color: #ffffff;
+}
+
+input::placeholder {
+    color: #ffffff;
+}
+
+button {
+    background-color: #63A6A1;
+    border-color: #917263;
+}
+
+a {
+    color: #917263;
+}
+
+.login{
+    height: 85vh;
+}
+
+footer {
+    height: 15vh;
+}
+
+td img {
+    width: 75px;
+}
+
+td a img {
+    width: 25px;
+}
