@@ -28,10 +28,10 @@ if (!empty($_SESSION['usuario']) && !empty($_GET['id'])) {
     require_once 'header.php';
     ?>
 
-    <section class="my-5">
+    <section class="container py-3">
         <article class="row text-center">
             <section class="d-flex justify-content-center">
-                <table class="table table-bordered table-hover table-striped w-auto">
+                <table class="table shadow rounded-3 overflow-hidden table-bordered table-hover table-striped w-auto">
                     <caption class="caption-top text-center bg-dark text-white">Listado de carrito</caption>
                     <tr>
                         <th class="bg-secondary text-white">Foto</th>
