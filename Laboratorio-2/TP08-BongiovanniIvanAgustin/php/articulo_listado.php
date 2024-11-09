@@ -17,24 +17,24 @@ if (empty($_SESSION['tipoUsuario'])) {
 $tipoUsuario = $_SESSION['tipoUsuario'];
 $nombreUsuario = $_SESSION['usuario'];
 
-// Función para gestionar la cookie según la categoría seleccionada
+
 function gestionarCookieCategoria($categoria, $nombreUsuario)
 {
     if ($categoria == "Todos") {
-        // Elimina la cookie si la categoría es "Todos"
+
         setcookie($nombreUsuario, "", time() - 3600, "/");
     } else {
-        // Guarda la cookie con la categoría seleccionada
-        setcookie($nombreUsuario, $categoria, time() + 3600 * 24 * 30, "/"); // Expira en 30 días
+
+        setcookie($nombreUsuario, $categoria, time() + 3600 * 24 * 30, "/"); // 30 dias
     }
 }
 
-// Verificar si hay una categoría seleccionada en el POST y gestionar la cookie
-if (isset($_POST["categoria"])) {
+
+if (isset($_POST["categoria"]) && !empty($_POST["categoria"])) {
     $categoria = $_POST["categoria"];
     gestionarCookieCategoria($categoria, $nombreUsuario);
 } else {
-    $categoria = isset($_COOKIE[$nombreUsuario]) ? $_COOKIE[$nombreUsuario] : "Todos";
+    $categoria = isset($_COOKIE[$nombreUsuario]) && !empty($_COOKIE[$nombreUsuario]) ? $_COOKIE[$nombreUsuario] : "Todos";
 }
 
 $buscar = isset($_GET["buscar"]) ? $_GET["buscar"] : "";
