@@ -30,7 +30,7 @@ $fechaDeHoy = crearFecha($fecha);
 
 ?>
 
-<header class="d-flex align-items-center justify-content-between bg-secondary shadow">
+<header class="d-flex align-items-center justify-content-between bg-primary shadow">
     <section class="p-2">
         <a class="btn btn-dark" href="articulo_listado.php">
             Listado de articulos

@@ -43,16 +43,15 @@ $buscar = isset($_GET["buscar"]) ? $_GET["buscar"] : "";
 <main class="container">
     <?php require_once 'header.php'; ?>
 
-    <section>
-        <article class="row text-center">
-            <section class="d-flex w-100 justify-content-between pt-3 pb-3">
-
-                <form action="articulo_listado.php" method="get">
-                    <input value="<?= !empty($buscar) ? $buscar : "" ?>" id="buscar" name="buscar" type="search" placeholder="Buscar..." />
-                    <button type="submit" class="btn btn-secondary">Buscar</button>
+    <section class="container py-3">
+        <article class="row text-center d-flex gap-3">
+            <section class="d-flex w-100 align-items-center container bg-secondary justify-content-between py-3">
+                <form action="articulo_listado.php" method="get" class="d-flex w-25 justify-content-between px-1 bg-transparent py-2 align-items-center">
+                    <input class="form-control w-75" value="<?= !empty($buscar) ? $buscar : "" ?>" id="buscar" name="buscar" type="search" placeholder="Buscar..." />
+                    <button type="submit" class="btn btn-primary">Buscar</button>
                 </form>
 
-                <section class="d-flex justify-content-center align-items-center">
+                <section class="d-flex justify-content-center align-items-center w-25">
                     <?php
                     if ($tipoUsuario == "Administrador") {
                         require_once 'boton_alta_articulo.php';
@@ -63,8 +62,8 @@ $buscar = isset($_GET["buscar"]) ? $_GET["buscar"] : "";
                 </section>
 
 
-                <form method="post" class="d-flex justify-content-center align-items-center">
-                    <select id="categoria" name="categoria" class="form-select">
+                <form method="post" class="d-flex w-25 justify-content-between px-1 bg-transparent py-2 align-items-center">
+                    <select id="categoria" name="categoria" class="form-select w-75">
                         <!-- 
                     si lacategoria es vacia o es todos se selecciona por defecto el todos
                     sino selecciona la categoria que viene por get 
@@ -76,12 +75,12 @@ $buscar = isset($_GET["buscar"]) ? $_GET["buscar"] : "";
                         <option value="Laptops" <?= $categoria == 'Laptops' ? 'selected' : '' ?>>Laptops</option>
                         <option value="Electrodomesticos" <?= $categoria == 'Electrodomesticos' ? 'selected' : '' ?>>Electrodomésticos</option>
                     </select>
-                    <button type="submit" class="btn btn-secondary">Filtrar</button>
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
                 </form>
             </section>
 
             <section class="d-flex justify-content-center">
-                <table class="table table-bordered table-hover table-striped w-auto">
+                <table class="table shadow rounded-3 overflow-hidden table-bordered table-hover table-striped w-auto">
                     <caption class="caption-top text-center bg-dark text-white">Listado de artículos</caption>
                     <tr>
                         <th class="bg-secondary text-white">Foto</th>
