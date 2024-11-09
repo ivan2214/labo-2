@@ -23,12 +23,12 @@ if (!empty($_SESSION['usuario']) && !empty($_GET['id'])) {
 
 ?>
 
-<main>
+<main class="container">
     <?php
     require_once 'header.php';
     ?>
 
-    <section>
+    <section class="my-5">
         <article class="row text-center">
             <section class="d-flex justify-content-center">
                 <table class="table table-bordered table-hover table-striped w-auto">
@@ -57,7 +57,7 @@ if (!empty($_SESSION['usuario']) && !empty($_GET['id'])) {
                             $suma = 0;
 
                             foreach ($_SESSION['carrito'] as $id => $cantidad) {
-                                print_r($_SESSION['carrito']);
+
                                 mysqli_stmt_execute($sentencia);
                                 mysqli_stmt_fetch($sentencia);
                                 $carrito = $_SESSION['carrito'];
@@ -83,8 +83,14 @@ if (!empty($_SESSION['usuario']) && !empty($_GET['id'])) {
                             desconectar($conexion);
                             echo '
                             <tr>
-                            <td colspan="3">Total:</td>
+                            <td colspan="5">Total:</td>
                             <td>' . number_format($suma, 2, ',', '.') . '</td>
+                            </tr>
+                            ';
+                        } else {
+                            echo '
+                            <tr>
+                            <td colspan="6">No hay articulos en el carrito</td>
                             </tr>
                             ';
                         }
