@@ -26,7 +26,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         header("refresh:2;url=../index.php");
         echo '<p>No se ha podido conectar con la base de datos</p>';
     } else {
-        $consulta = 'SELECT usuario, pass, foto FROM usuario WHERE usuario = ? AND pass = ?';
+        $consulta = 'SELECT usuario, pass, foto, tipo FROM usuario WHERE usuario = ? AND pass = ?';
 
         $sentencia = mysqli_prepare($conexion, $consulta);
 
@@ -34,16 +34,18 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 
         $q = mysqli_stmt_execute($sentencia);
 
-        mysqli_stmt_bind_result($sentencia, $usernameDB, $passwordDB, $fotoDB);
+        mysqli_stmt_bind_result($sentencia, $usernameDB, $passwordDB, $fotoDB,$tipoUsuarioDB);
 
         if ($q) {
             mysqli_stmt_fetch($sentencia);
             // solo tendran valores cuando coincidan en la busqueda sino seran vacios
             if (!empty($usernameDB) && !empty($passwordDB)) {
-                header("refresh:0;url=articulo_listado.php");
-                require_once 'encabezado.php';
                 $_SESSION['usuario'] = $usernameDB;
                 $_SESSION['fotoUsuario'] = $fotoDB;
+                $_SESSION['tipoUsuario']= $tipoUsuarioDB;
+                header("refresh:0;url=articulo_listado.php");
+                require_once 'encabezado.php';
+                var_dump($_SESSION);
             } else {
                 header("refresh:1;url=../index.php");
                 echo '<p>Error usuario o contraseña incorrectos</p>';

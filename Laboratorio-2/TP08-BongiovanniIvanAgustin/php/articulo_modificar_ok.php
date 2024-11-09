@@ -1,5 +1,24 @@
 <?php
-$usuarioNombre = $_GET["usuarioFoto"];
+session_start();
+$ruta = '../';
+require("encabezado.php");
+
+
+if (!empty($_SESSION["usuario"])) {
+    $usuario = $_SESSION["usuario"];
+    $fotoUsuario = $_SESSION["fotoUsuario"];
+
+
+    if ($fotoUsuario == "" || $fotoUsuario == NULL || empty($fotoUsuario)) {
+        $fotoUsuario = "usuario_default.png";
+    }
+
+} else {
+    header('refresh:1;../index.php');
+    $usuario = "";
+    $fotoUsuario = "usuario_default.png";
+}
+
 
 if (!empty($_POST['id']) && !empty($_POST['nombre']) && !empty($_POST['categoria']) && !empty($_POST['precio'])) {
     $conImagen = false;
@@ -28,7 +47,7 @@ if (!empty($_POST['id']) && !empty($_POST['nombre']) && !empty($_POST['categoria
     require_once 'conexion.php';
     $conexion = conectar();
     if (!$conexion) {
-        header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioNombre);
+        header("refresh:1;url=articulo_listado.php");
         echo '<p>Error al conectar con la base de datos</p>';
     } else {
 
@@ -38,7 +57,7 @@ if (!empty($_POST['id']) && !empty($_POST['nombre']) && !empty($_POST['categoria
             $envio = move_uploaded_file($rutaOrigen, $rutaDestino);
 
             if (!$envio) {
-                header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioNombre);
+                header("refresh:1;url=articulo_listado.php");
                 echo '<p>Error al guardar imagen</p>';
             }
 
@@ -54,14 +73,14 @@ if (!empty($_POST['id']) && !empty($_POST['nombre']) && !empty($_POST['categoria
 
 
         if ($resultado) {
-            header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioNombre);
+            header("refresh:1;url=articulo_listado.php");
             echo '<p>Modificación exitosa</p>';
         } else {
-            header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioNombre);
+            header("refresh:1;url=articulo_listado.php");
             echo '<p>Error al modificar el artículo</p>';
         }
     }
 } else {
-    header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioNombre);
+    header("refresh:1;url=articulo_listado.php");
     echo '<p>Información incompleta para la modificación</p>';
 }

@@ -1,7 +1,21 @@
 <?php
+session_start();
+$ruta = '../';
+require("encabezado.php");
 
-if (!empty($_GET["usuario"])) {
-    $usuarioURL = $_GET["usuario"];
+if (!empty($_SESSION["usuario"])) {
+    $usuario = $_SESSION["usuario"];
+    $fotoUsuario = $_SESSION["fotoUsuario"];
+
+
+    if ($fotoUsuario == "" || $fotoUsuario == NULL || empty($fotoUsuario)) {
+        $fotoUsuario = "usuario_default.png";
+    }
+
+} else {
+    header('refresh:1;../index.php');
+    $usuario = "";
+    $fotoUsuario = "usuario_default.png";
 }
 
 if (!empty($_POST['nombre']) && !empty($_POST['categoria']) && !empty($_POST['precio'])) {
@@ -55,18 +69,18 @@ if (!empty($_POST['nombre']) && !empty($_POST['categoria']) && !empty($_POST['pr
                 $rutaDestino = "../img/articulos/" . $nombreImagen;
                 $envio = move_uploaded_file($rutaOrigen, $rutaDestino);
                 if ($envio) {
-                    header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioURL);
+                    header("refresh:1;url=articulo_listado.php");
                     echo '<p>Guardado exitoso </p>';
                 } else {
-                    header("refresh:1;url=articulo_alta.php?usuario=" . $usuarioURL);
+                    header("refresh:1;url=articulo_alta.php");
                     echo '<p>Error al guardar</p>';
                 }
             } else {
-                header("refresh:1;url=articulo_listado.php?usuario=" . $usuarioURL);
+                header("refresh:1;url=articulo_listado.php");
                 echo '<p>Guardado exitoso </p>';
             }
         } else {
-            header("refresh:1;url=articulo_alta.php?usuario=" . $usuarioURL);
+            header("refresh:1;url=articulo_alta.php");
             echo '<p>Error al guardar</p>';
         }
 

@@ -3,54 +3,91 @@ session_start();
 
 $ruta = '../';
 require_once "encabezado.php";
-$rutaFotosUsuarios = "../img/usuarios/";
+
 $rutaFotosArticulos = "../img/articulos/";
 
-if (!empty($_SESSION["usuario"])) {
-    $usuario = $_SESSION["usuario"];
-    $fotoUsuario = $_SESSION["fotoUsuario"];
-    var_dump($_SESSION);
-
-    if ($fotoUsuario == "" || $fotoUsuario == NULL || empty($fotoUsuario)) {
-        $fotoUsuario = "usuario_default.png";
-    }
-} else {
+if (empty($_SESSION["usuario"]))
     header('refresh:1;../index.php');
-    $usuario = "";
-    $fotoUsuario = "usuario_default.png";
+
+
+
+
+if (empty($_SESSION['tipoUsuario'])) {
+    header('refresh:1;../index.php');
+}
+$tipoUsuario = $_SESSION['tipoUsuario'];
+
+if (!empty($_POST["categoria"])) {
+    $categoria = $_POST["categoria"];
+} else {
+    $categoria = "";
 }
 
-require_once 'funciones.php';
+if (!empty($_GET["buscar"])) {
+    $buscar = $_GET["buscar"];
+} else {
+    $buscar = "";
+}
 
-date_default_timezone_set('America/Argentina/Tucuman');
 
-$fecha = date("Y-m-d");
-
-$fechaDeHoy = crearFecha($fecha);
-
-echo  $fotoUsuario;
 
 ?>
 
 <main class="container">
-    <header class="d-flex align-items-center justify-content-between bg-secondary shadow">
-        <section class="p-2">
-            <h2 class="h5 fw-semibold mb-0"><?= $fechaDeHoy ?></h2>
-        </section>
-        <section class="d-flex align-items-center gap-3 px-3 py-2">
-            <h2 class="h5 fw-semibold mb-0"><?= $usuario ?></h2>
-            <figure class="rounded-circle overflow-hidden border" style="width: 48px; height: 48px;">
-                <img class="img-fluid rounded-circle" src="<?= $rutaFotosUsuarios . $fotoUsuario ?>"
-                    alt="Foto de perfil del usuario" style="width: 100%; height: 100%;">
-            </figure>
-        </section>
-    </header>
+
+    <?php
+    require_once 'header.php';
+    ?>
 
     <section>
         <article class="row text-center">
-            <section class="menu_tmp pt-3 pb-3">
-                <a class="btn btn-dark" href="articulo_alta.php">+ Alta Articulo</a>
+            <section class="d-flex w-100 justify-content-between pt-3 pb-3">
+
+
+                <form action="articulo_listado.php" method="get">
+                    <!-- 
+                    si buscar es vacio se muestra vacio
+                    sino se muestra lo que viene por get en el input    
+                 -->
+                    <input value="<?= !empty($buscar) ? $buscar : "" ?>" id="buscar" name="buscar" type="search" placeholder="Buscar..." />
+                    <button type="submit" class="btn btn-secondary">
+                        Buscar
+                    </button>
+                </form>
+
+
+                <section class="d-flex justify-content-center align-items-center">
+                    <?php
+                    if ($tipoUsuario == "Administrador") {
+                        require_once 'boton_alta_articulo.php';
+                    } else {
+                        require_once 'boton_mi_carrito.php';
+                    }
+                    ?>
+                </section>
+
+
+                <form method="post" class="d-flex justify-content-center align-items-center">
+                    <select id="categoria" name="categoria" class="form-select">
+                        <!-- 
+                    si lacategoria es vacia o es todos se selecciona por defecto el todos
+                    sino selecciona la categoria que viene por get 
+
+                     -->
+                        <option value="Todos" <?= empty($categoria) || $categoria == 'Todos' ? 'selected' : '' ?>>Todos</option>
+                        <option value="Celulares" <?= $categoria == 'Celulares' ? 'selected' : '' ?>>Celulares</option>
+                        <option value="Televisores" <?= $categoria == 'Televisores' ? 'selected' : '' ?>>Televisores</option>
+                        <option value="Laptops" <?= $categoria == 'Laptops' ? 'selected' : '' ?>>Laptops</option>
+                        <option value="Electrodomesticos" <?= $categoria == 'Electrodomesticos' ? 'selected' : '' ?>>Electrodomésticos</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-secondary">
+                        Filtrar
+                    </button>
+                </form>
+
             </section>
+
             <section class="d-flex justify-content-center">
                 <table class="table table-bordered table-hover table-striped w-auto">
                     <caption class="caption-top text-center bg-dark text-white">Listado de artículos</caption>
@@ -59,8 +96,18 @@ echo  $fotoUsuario;
                         <th class="bg-secondary text-white">Producto</th>
                         <th class="bg-secondary text-white">Categoría</th>
                         <th class="bg-secondary text-white">Precio</th>
-                        <th class="bg-secondary text-white">Modificar</th>
-                        <th class="bg-secondary text-white">Eliminar</th>
+
+                        <?php
+
+                        if ($tipoUsuario == "Administrador") {
+                            echo '<th class="bg-secondary text-white">Modificar</th>';
+                            echo '<th class="bg-secondary text-white">Eliminar</th>';
+                        } else {
+                            echo '<th class="bg-secondary text-white">Comprar</th>';
+                        }
+
+                        ?>
+
                     </tr>
 
 
@@ -77,24 +124,58 @@ echo  $fotoUsuario;
                             echo '<p>No se ha podido conectar con la base de datos</p>';
                         } else {
 
-                            $consulta = "SELECT id_articulo, nombre, categoria, precio, foto FROM articulo"; // consulta
 
-                            $sentencia = mysqli_prepare($conexion, $consulta); // prepara la sentencia
 
-                            $q = mysqli_stmt_execute($sentencia); // ejecuta la sentencia
+                            if (!empty($_GET["buscar"])) {
+                                $buscar = $_GET["buscar"];
+                            }
 
-                            mysqli_stmt_bind_result($sentencia, $id, $nombre, $categoria, $precio, $fotoArticulo); // asocia los resultados
+                            if (!empty($_POST["categoria"])) {
+                                $categoria = $_POST["categoria"];
+                            }
+
+
+                            if (empty($buscar) && (empty($categoria) || $categoria == "Todos")) {
+                                $consulta = "SELECT * FROM articulo";
+                            } else if (!empty($buscar) && !empty($categoria) && $categoria != "Todos") {
+                                $consulta = "SELECT * FROM articulo WHERE nombre LIKE ? AND categoria LIKE ?";
+                            } else if (!empty($buscar)) {
+                                $consulta = "SELECT * FROM articulo WHERE nombre LIKE ?";
+                            } else if (!empty($categoria) && $categoria != "Todos") {
+                                $consulta = "SELECT * FROM articulo WHERE categoria LIKE ?";
+                            }
+
+
+                            $sentencia = mysqli_prepare($conexion, $consulta);
+
+                            if (!empty($buscar) && !empty($categoria) && $categoria != "Todos") {
+                                // caso que busca por nombre y categoria distinta de todos
+                                $cate = "%" . $categoria . "%";
+                                $busca = "%" . $buscar . "%";
+                                mysqli_stmt_bind_param($sentencia, "ss", $busca, $cate);
+                            } else if (!empty($buscar)) {
+                                // caso que solo busca por nombre
+                                $busca = "%" . $buscar . "%";
+                                mysqli_stmt_bind_param($sentencia, "s", $busca);
+                            } else if (!empty($categoria) && $categoria != "Todos") {
+                                // caso que solo busca por categoria
+                                $cat = "%" . $categoria . "%";
+                                mysqli_stmt_bind_param($sentencia, "s", $cat);
+                            }
+
+
+                            $q = mysqli_stmt_execute($sentencia);
+
+                            mysqli_stmt_bind_result($sentencia, $id, $nombre, $categoria, $precio, $fotoArticulo);
 
                             if ($q) {
 
-                                mysqli_stmt_store_result($sentencia); // almacena los resultados
+                                mysqli_stmt_store_result($sentencia);
                                 $cantFilas = mysqli_stmt_num_rows($sentencia);
 
 
 
                                 if ($cantFilas > 0) {
-                                    //si obtuve resultados entonces los voy a iterar y los mostrare por pantalla en la tabla
-                                    // esto va uno por uno no lo devuelve como un array sino que es independiente del anterior podria guardar en un array los valores e iterarlos luego tambien (es una opcion) (Nota para el que corrige: escribo esto para acordarme como vuelven los datos)
                                     while (mysqli_stmt_fetch($sentencia)) {
                                         if ($fotoArticulo == '' || $fotoArticulo == NULL || empty($fotoArticulo)) {
                                             $fotoArticulo = "sin_imagen.png";
@@ -105,16 +186,28 @@ echo  $fotoUsuario;
                                         echo '<td>' . $nombre . '</td>';
                                         echo '<td>' . $categoria . '</td>';
                                         echo '<td>$ ' . number_format($precio, 0, ",", ".") . '</td>';
-                                        echo '<td >
-                    <a  href="articulo_modificar.php?id=' . $id . '">
-                    <img src="../img/modificar.png" alt="Imagen del artículo" >
-                    </a>
-                    </td>';
-                                        echo '<td >
+
+                                        if ($tipoUsuario == "Administrador") {
+                                            // solo muestra los botones de modificar y eliminar si es administrador
+                                            echo '<td >
+										<a  href="articulo_modificar.php?id=' . $id . '">
+										<img src="../img/modificar.png" alt="Imagen del artículo" >
+										</a>
+						</td>';
+                                            echo '<td >
                     <a  href="articulo_eliminar.php?id=' . $id . '">
                     <img src="../img/eliminar.png" alt="Imagen del artículo" >
                     </a>
                     </td>';
+                                            echo '</tr>';
+                                        } else {
+                                            // solo muestra el boton de comprar si no es administrador
+                                            echo '<td >
+                    <a  href="articulo_carrito.php?id=' . $id . '">
+                    <img src="../img/carrito.png" alt="Imagen del carrito" >
+                    </a>
+                    </td>';
+                                        }
                                         echo '</tr>';
                                     }
                                 } else {

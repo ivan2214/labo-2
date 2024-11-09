@@ -1,0 +1,1 @@
+<a class="btn btn-dark" href="articulo_alta.php">+ Alta Articulo</a>
