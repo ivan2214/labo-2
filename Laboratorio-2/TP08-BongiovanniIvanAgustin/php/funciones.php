@@ -24,29 +24,4 @@ function crearFecha($fecha)
     ];
 
     return $dia . " de " . $meses[$mes] . " de " . $anio;
-
 }
-
-
-function mostrarArticulosCookie($preferencias){
-    $conexion=conectar();
-
-    if(!empty($preferencias)){
-        $prefe=explode("-",$preferencias);
-		$consulta= "SELECT * FROM articulo WHERE categoria = ? ";
-		$sentencia=mysqli_prepare($conexion,$consulta);
-		mysqli_stmt_bind_param($sentencia,"s",$prefe[0]);
-    }else{
-		$consulta= "SELECT * FROM articulo";
-		$sentencia=mysqli_prepare($conexion,$consulta);
-	}
-
-}
-
-
-function eliminarCookie($usuario){
-    unset($_COOKIE[$usuario]);
-    setcookie($usuario,"",time()-3600,"/");
-    header("refresh:0;url=listado.php");
-}
-

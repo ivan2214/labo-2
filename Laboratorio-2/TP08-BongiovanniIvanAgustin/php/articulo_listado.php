@@ -6,55 +6,51 @@ require_once "encabezado.php";
 
 $rutaFotosArticulos = "../img/articulos/";
 
-if (empty($_SESSION["usuario"]))
+if (empty($_SESSION["usuario"])) {
     header('refresh:1;../index.php');
-
-
-
+}
 
 if (empty($_SESSION['tipoUsuario'])) {
     header('refresh:1;../index.php');
 }
+
 $tipoUsuario = $_SESSION['tipoUsuario'];
+$nombreUsuario = $_SESSION['usuario'];
 
-if (!empty($_POST["categoria"])) {
+// Función para gestionar la cookie según la categoría seleccionada
+function gestionarCookieCategoria($categoria, $nombreUsuario)
+{
+    if ($categoria == "Todos") {
+        // Elimina la cookie si la categoría es "Todos"
+        setcookie($nombreUsuario, "", time() - 3600, "/");
+    } else {
+        // Guarda la cookie con la categoría seleccionada
+        setcookie($nombreUsuario, $categoria, time() + 3600 * 24 * 30, "/"); // Expira en 30 días
+    }
+}
+
+// Verificar si hay una categoría seleccionada en el POST y gestionar la cookie
+if (isset($_POST["categoria"])) {
     $categoria = $_POST["categoria"];
+    gestionarCookieCategoria($categoria, $nombreUsuario);
 } else {
-    $categoria = "";
+    $categoria = isset($_COOKIE[$nombreUsuario]) ? $_COOKIE[$nombreUsuario] : "Todos";
 }
 
-if (!empty($_GET["buscar"])) {
-    $buscar = $_GET["buscar"];
-} else {
-    $buscar = "";
-}
-
-
-
+$buscar = isset($_GET["buscar"]) ? $_GET["buscar"] : "";
 ?>
 
 <main class="container">
-
-    <?php
-    require_once 'header.php';
-    ?>
+    <?php require_once 'header.php'; ?>
 
     <section>
         <article class="row text-center">
             <section class="d-flex w-100 justify-content-between pt-3 pb-3">
 
-
                 <form action="articulo_listado.php" method="get">
-                    <!-- 
-                    si buscar es vacio se muestra vacio
-                    sino se muestra lo que viene por get en el input    
-                 -->
                     <input value="<?= !empty($buscar) ? $buscar : "" ?>" id="buscar" name="buscar" type="search" placeholder="Buscar..." />
-                    <button type="submit" class="btn btn-secondary">
-                        Buscar
-                    </button>
+                    <button type="submit" class="btn btn-secondary">Buscar</button>
                 </form>
-
 
                 <section class="d-flex justify-content-center align-items-center">
                     <?php
@@ -80,12 +76,8 @@ if (!empty($_GET["buscar"])) {
                         <option value="Laptops" <?= $categoria == 'Laptops' ? 'selected' : '' ?>>Laptops</option>
                         <option value="Electrodomesticos" <?= $categoria == 'Electrodomesticos' ? 'selected' : '' ?>>Electrodomésticos</option>
                     </select>
-
-                    <button type="submit" class="btn btn-secondary">
-                        Filtrar
-                    </button>
+                    <button type="submit" class="btn btn-secondary">Filtrar</button>
                 </form>
-
             </section>
 
             <section class="d-flex justify-content-center">
@@ -98,134 +90,86 @@ if (!empty($_GET["buscar"])) {
                         <th class="bg-secondary text-white">Precio</th>
 
                         <?php
-
                         if ($tipoUsuario == "Administrador") {
                             echo '<th class="bg-secondary text-white">Modificar</th>';
                             echo '<th class="bg-secondary text-white">Eliminar</th>';
                         } else {
                             echo '<th class="bg-secondary text-white">Comprar</th>';
                         }
-
                         ?>
-
                     </tr>
-
-
                     <tbody class="bg-white">
                         <?php
-
                         require_once 'conexion.php';
-
                         $conexion = conectar();
 
-
                         if (!$conexion) {
-                            header("refresh:0;url=../index.php");
                             echo '<p>No se ha podido conectar con la base de datos</p>';
                         } else {
-
-
-
-                            if (!empty($_GET["buscar"])) {
-                                $buscar = $_GET["buscar"];
+                            $consulta = "SELECT * FROM articulo";
+                            if (!empty($buscar) && $categoria != "Todos") {
+                                // caso con busqueda y categoria concateno a la consulta las condiciones
+                                $consulta .= " WHERE nombre LIKE ? AND categoria LIKE ?";
+                            } elseif (!empty($buscar)) {
+                                // caso solo busqueda concateno a la consulta la condicion
+                                $consulta .= " WHERE nombre LIKE ?";
+                            } elseif ($categoria != "Todos") {
+                                // caso solo categoria concateno a la consulta la condicion
+                                $consulta .= " WHERE categoria LIKE ?";
                             }
-
-                            if (!empty($_POST["categoria"])) {
-                                $categoria = $_POST["categoria"];
-                            }
-
-
-                            if (empty($buscar) && (empty($categoria) || $categoria == "Todos")) {
-                                $consulta = "SELECT * FROM articulo";
-                            } else if (!empty($buscar) && !empty($categoria) && $categoria != "Todos") {
-                                $consulta = "SELECT * FROM articulo WHERE nombre LIKE ? AND categoria LIKE ?";
-                            } else if (!empty($buscar)) {
-                                $consulta = "SELECT * FROM articulo WHERE nombre LIKE ?";
-                            } else if (!empty($categoria) && $categoria != "Todos") {
-                                $consulta = "SELECT * FROM articulo WHERE categoria LIKE ?";
-                            }
-
 
                             $sentencia = mysqli_prepare($conexion, $consulta);
 
-                            if (!empty($buscar) && !empty($categoria) && $categoria != "Todos") {
-                                // caso que busca por nombre y categoria distinta de todos
-                                $cate = "%" . $categoria . "%";
+
+                            if (!empty($buscar) && $categoria != "Todos") {
+                                // caso con busqueda y categoria bindeo los parametros de busqueda y categoria
                                 $busca = "%" . $buscar . "%";
-                                mysqli_stmt_bind_param($sentencia, "ss", $busca, $cate);
-                            } else if (!empty($buscar)) {
-                                // caso que solo busca por nombre
+                                $cat = "%" . $categoria . "%";
+                                mysqli_stmt_bind_param($sentencia, "ss", $busca, $cat);
+                            } elseif (!empty($buscar)) {
+                                // caso solo busqueda bindeo el parametro de busqueda
                                 $busca = "%" . $buscar . "%";
                                 mysqli_stmt_bind_param($sentencia, "s", $busca);
-                            } else if (!empty($categoria) && $categoria != "Todos") {
-                                // caso que solo busca por categoria
+                            } elseif ($categoria != "Todos") {
+                                // caso solo categoria bindeo el parametro de categoria
                                 $cat = "%" . $categoria . "%";
                                 mysqli_stmt_bind_param($sentencia, "s", $cat);
                             }
 
-
                             $q = mysqli_stmt_execute($sentencia);
-
                             mysqli_stmt_bind_result($sentencia, $id, $nombre, $categoria, $precio, $fotoArticulo);
 
                             if ($q) {
-
                                 mysqli_stmt_store_result($sentencia);
-                                $cantFilas = mysqli_stmt_num_rows($sentencia);
-
-
-
-                                if ($cantFilas > 0) {
+                                if (mysqli_stmt_num_rows($sentencia) > 0) {
                                     while (mysqli_stmt_fetch($sentencia)) {
-                                        if ($fotoArticulo == '' || $fotoArticulo == NULL || empty($fotoArticulo)) {
-                                            $fotoArticulo = "sin_imagen.png";
-                                        }
-                                        echo '<td>
-            <img src="' . $rutaFotosArticulos . $fotoArticulo . '" alt="Imagen del artículo" style="width: 100px; height: auto;">
-            </td>';
+                                        $fotoArticulo = $fotoArticulo ?: "sin_imagen.png";
+                                        echo '<tr>';
+                                        echo '<td><img src="' . $rutaFotosArticulos . $fotoArticulo . '" alt="Imagen del artículo" style="width: 100px; height: auto;"></td>';
                                         echo '<td>' . $nombre . '</td>';
                                         echo '<td>' . $categoria . '</td>';
                                         echo '<td>$ ' . number_format($precio, 0, ",", ".") . '</td>';
 
                                         if ($tipoUsuario == "Administrador") {
-                                            // solo muestra los botones de modificar y eliminar si es administrador
-                                            echo '<td >
-										<a  href="articulo_modificar.php?id=' . $id . '">
-										<img src="../img/modificar.png" alt="Imagen del artículo" >
-										</a>
-						</td>';
-                                            echo '<td >
-                    <a  href="articulo_eliminar.php?id=' . $id . '">
-                    <img src="../img/eliminar.png" alt="Imagen del artículo" >
-                    </a>
-                    </td>';
-                                            echo '</tr>';
+                                            echo '<td><a href="articulo_modificar.php?id=' . $id . '"><img src="../img/modificar.png" alt="Modificar"></a></td>';
+                                            echo '<td><a href="articulo_eliminar.php?id=' . $id . '"><img src="../img/eliminar.png" alt="Eliminar"></a></td>';
                                         } else {
-                                            // solo muestra el boton de comprar si no es administrador
-                                            echo '<td >
-                    <a  href="articulo_carrito.php?id=' . $id . '">
-                    <img src="../img/carrito.png" alt="Imagen del carrito" >
-                    </a>
-                    </td>';
+                                            echo '<td><a href="articulo_carrito.php?id=' . $id . '"><img src="../img/carrito.png" alt="Carrito"></a></td>';
                                         }
                                         echo '</tr>';
                                     }
                                 } else {
-                                    echo '<p>No hay articulos</p>';
+                                    echo '<tr><td colspan="6">No hay artículos</td></tr>';
                                 }
                             }
                             desconectar($conexion);
                         }
-
                         ?>
                     </tbody>
-
                 </table>
             </section>
         </article>
     </section>
 </main>
 
-<?php
-require_once "pie.php";
-?>
+<?php require_once "pie.php"; ?>
