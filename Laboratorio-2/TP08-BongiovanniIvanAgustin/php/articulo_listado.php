@@ -21,19 +21,20 @@ $nombreUsuario = $_SESSION['usuario'];
 function gestionarCookieCategoria($categoria, $nombreUsuario)
 {
     if ($categoria == "Todos") {
-
+        // si la categoria es todos borro la cookie
         setcookie($nombreUsuario, "", time() - 3600, "/");
     } else {
-
+        // si la categoria no es todos la guardo en la cookie parra asi mostrar los articulos de esa categoria preferida del usuario
         setcookie($nombreUsuario, $categoria, time() + 3600 * 24 * 30, "/"); // 30 dias
     }
 }
 
-
+// si la categoria viene por post la guardo en la cookie para asi mostrar los articulos de esa categoria preferida del usuario
 if (isset($_POST["categoria"]) && !empty($_POST["categoria"])) {
     $categoria = $_POST["categoria"];
     gestionarCookieCategoria($categoria, $nombreUsuario);
 } else {
+    // si la categoria viene por cookie la guardo en la variable
     $categoria = isset($_COOKIE[$nombreUsuario]) && !empty($_COOKIE[$nombreUsuario]) ? $_COOKIE[$nombreUsuario] : "Todos";
 }
 
@@ -66,7 +67,7 @@ $buscar = isset($_GET["buscar"]) ? $_GET["buscar"] : "";
                     <select id="categoria" name="categoria" class="form-select w-75">
                         <!-- 
                     si lacategoria es vacia o es todos se selecciona por defecto el todos
-                    sino selecciona la categoria que viene por get 
+                    sino selecciona la categoria que viene por post
 
                      -->
                         <option value="Todos" <?= empty($categoria) || $categoria == 'Todos' ? 'selected' : '' ?>>Todos</option>
